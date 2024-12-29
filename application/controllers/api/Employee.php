@@ -66,13 +66,19 @@ class Employee extends RestController
     public function index_get()
     {
         try {
-            $data = $this->db->get_where("employee", ['EmployeeID' => $this->user_id])->row_array();
-
-            $this->response([
-                'status' => true,
-                'message' => 'successfully',
-                'items' => $data
-            ], RestController::HTTP_OK);
+            $query = $this->db->get_where("employee", ['EmployeeID' => $this->user_id]);
+            if ($query->num_rows() > 0) {
+                $this->response([
+                    'status' => true,
+                    'message' => 'successfully',
+                    'items' => $query->row_array()
+                ], RestController::HTTP_OK);
+            } else {
+                $this->response([
+                    'status' => false,
+                    'message' => 'data not found',
+                ], RestController::HTTP_NOT_FOUND);
+            }
         } catch (\Throwable $err) {
 
             $this->response([
