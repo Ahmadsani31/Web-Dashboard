@@ -67,6 +67,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
 								<div class="card-header">
 									<h5>Upload File Excel</h5>
 								</div>
+								<div class="card-body">
+									<button class="btn btn-secondary btn-sm" onclick="resetDatabase()">Clear Database</button>
+								</div>
 								<!-- Card Body -->
 								<div class="card-body">
 									<?php if ($this->session->flashdata('error')): ?>
@@ -116,7 +119,22 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 
 	<?php $this->load->view('layout/js.php'); ?>
-
+	<script>
+		function resetDatabase() {
+			if (confirm('Kamu yakin ingin clear database?\nEither OK or Cancel.') == true) {
+				$.ajax({
+					url: "<?= base_url('excel/clear_database'); ?>",
+					method: 'GET',
+					dataType: 'JSON',
+				}).done(function(response) {
+					// console.log(response.series);
+					alert(response.message);
+				}).fail(function(res) {
+					alert("error");
+				});
+			}
+		}
+	</script>
 </body>
 
 </html>

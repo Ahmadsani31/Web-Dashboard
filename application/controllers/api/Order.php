@@ -71,12 +71,20 @@ class Order extends RestController
             $this->db->where('EmployeeID', $this->user_id);
             $this->db->group_by("`client`.ClientName");
             $this->db->order_by('`order`.OrderDate', 'DESC');
-            $query = $this->db->get()->result_array();
-            $this->response([
-                'status' => true,
-                'message' => 'successfully',
-                'items' => $query
-            ], RestController::HTTP_OK);
+            $query = $this->db->get();
+
+            if ($query->num_rows() > 0) {
+                $this->response([
+                    'status' => true,
+                    'message' => 'successfully',
+                    'items' => $query->result_array()
+                ], RestController::HTTP_OK);
+            } else {
+                $this->response([
+                    'status' => false,
+                    'message' => 'data not found',
+                ], RestController::HTTP_NOT_FOUND);
+            }
         } catch (\Throwable $err) {
             $this->response([
                 'status' => true,
@@ -93,12 +101,19 @@ class Order extends RestController
             $this->db->join('employee as b', 'b.EmployeeID = a.EmployeeID');
             $this->db->where('b.EmployeeID', $this->user_id);
             $this->db->order_by('a.OrderDate', 'DESC');
-            $query = $this->db->get()->result_array();
-            $this->response([
-                'status' => true,
-                'message' => 'successfully',
-                'items' => $query
-            ], RestController::HTTP_OK);
+            $query = $this->db->get();
+            if ($query->num_rows() > 0) {
+                $this->response([
+                    'status' => true,
+                    'message' => 'successfully',
+                    'items' => $query->result_array()
+                ], RestController::HTTP_OK);
+            } else {
+                $this->response([
+                    'status' => false,
+                    'message' => 'data not found',
+                ], RestController::HTTP_NOT_FOUND);
+            }
         } catch (\Throwable $err) {
             $this->response([
                 'status' => true,

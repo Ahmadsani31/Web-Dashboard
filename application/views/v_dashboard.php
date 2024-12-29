@@ -125,6 +125,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 					<!-- Project Card Example -->
 					<div class="card shadow mb-4">
+						<div class="card-header">
+							<h5 class="m-0 font-weight-bold text-dark">
+								Recent Order
+							</h5>
+						</div>
 						<div class="card-body">
 							<div class="table-responsive">
 								<table class="table" id="DTable">
@@ -215,19 +220,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 		});
 
 		var options = {
-			series: [{
-					name: "Session Duration",
-					data: [45, 52, 38, 24, 33, 26, 21, 20, 6, 8, 15, 10]
-				},
-				{
-					name: "Page Views",
-					data: [35, 41, 62, 42, 13, 18, 29, 37, 36, 51, 32, 35]
-				},
-				{
-					name: 'Total Visits',
-					data: [87, 57, 74, 99, 75, 38, 62, 47, 82, 56, 45, 47]
-				}
-			],
+			series: [],
 			chart: {
 				height: 350,
 				type: 'line',
@@ -242,7 +235,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 				curve: 'smooth',
 			},
 			title: {
-				text: 'Page Statistics',
+				text: 'Sales Performance',
 				align: 'left'
 			},
 			legend: {
@@ -257,7 +250,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 				}
 			},
 			xaxis: {
-				categories: ['Jan', 'Feb', 'Mar'],
+				categories: [],
 
 			},
 			yaxis: {
